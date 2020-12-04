@@ -31,7 +31,7 @@ int main()
 		while(x != -1 && y != -1)
 		{
 			scanf("%d %d",&x,&y);
-			quadrado[x][y] = 1;
+			quadrado[x-1][y-1] = 1;
 		}
 		
 		//printar o tabuleiro
