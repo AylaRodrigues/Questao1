@@ -6,12 +6,12 @@ Garotes de Programa- Ayla Rodrigues de Moura, Douglas Mareli, João Spala, Sofia
 
 int main () {
 	
-	int quadrado[10][10];
+	int quadrado[30][30];
 	
 	
-	for(int i = 0; i < 10; i++)
+	for(int i = 0; i < 30; i++)
 	{
-		for(int j = 0; j< 10; j++)
+		for(int j = 0; j< 30; j++)
 		{
 			quadrado[i][j] = 0;
 		}
@@ -24,13 +24,13 @@ int main () {
 		quadrado[x][y] = 1;
 	}
 	
-	for(int y = 0; y < 10; y++)
+	for(int y = 0; y < 30; y++)
 	{
-		for(int z = 0; z < 10; z++)
+		for(int z = 0; z < 30; z++)
 		{
 			if(quadrado[y][z] == 1)
 			{
-				printf(" 0 ");
+				printf("0");
 			}else if(quadrado[y][z] == 0)
 			{
 				printf(" ");
