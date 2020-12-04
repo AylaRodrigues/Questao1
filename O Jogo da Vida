@@ -43,6 +43,7 @@ int main()
 		
 		//opção de escolha
 		int x,y; //linha e coluna
+		printf("Digite as cordenadas das células vivas\n");
 		while(x != -1 && y != -1)
 		{
 			scanf("%d %d",&x,&y);
@@ -65,10 +66,6 @@ int main()
 			}
 			printf("\n");
 		}
-	}
-	else
-	{
-		
 	}
 	
 	return 0;
