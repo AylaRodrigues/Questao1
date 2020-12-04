@@ -8,7 +8,6 @@ int main () {
 	
 	int quadrado[30][30];
 	
-	
 	for(int i = 0; i < 30; i++)
 	{
 		for(int j = 0; j< 30; j++)
@@ -17,6 +16,7 @@ int main () {
 		}
 	}
 	
+	//opção de escolha
 	int x,y; //linha e coluna
 	while(x != -1 && y != -1)
 	{
@@ -24,6 +24,7 @@ int main () {
 		quadrado[x][y] = 1;
 	}
 	
+	//printar o tabuleiro
 	for(int y = 0; y < 30; y++)
 	{
 		for(int z = 0; z < 30; z++)
