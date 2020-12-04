@@ -6,6 +6,27 @@ Garotes de Programa- Ayla Rodrigues de Moura, Douglas Mareli, João Spala, Sofia
 
 int main () {
 	
+	setlocale (LC_ALL,"");
+	char start;
+
+	printf("Para iniciação randômica digite 'r', para selecionar as células digite 'c'\n");
+	scanf("%s", &start);
+
+	if (start== 'r')
+	{
+		int espacos;
+		int rd;
+		printf("Quantas células vivas?\n");
+		scanf("%d", &espacos);
+		rd = espacos * 2;
+
+		for (int rd = 0; rd < rd-1; rd++)
+		{
+		    printf("%d\n", rand() % 10);
+		}
+		
+		else
+		
 	int quadrado[30][30];
 	
 	
