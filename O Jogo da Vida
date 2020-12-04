@@ -15,8 +15,23 @@ int main()
 	
 	printf("Para inicialização randomica digite 'r', para selecionar as célular digite 'c'\n");
 	scanf("%c", &start);
+	
+	if (start== 'r')
+	{
+		int espacos;
+		int rd;
+		int menor;
+		printf("Quantas células vivas?\n");
+		scanf("%d", &espacos);
+		rd = espacos * 2;
 
-	if(start=='c')
+		for (int w = 0; w < rd; w++)
+		{
+		    printf("%d \n", rand() % 30);
+		}
+	}	
+
+	else 
 	{
 		for(int i = 0; i < 30; i++)
 		{
