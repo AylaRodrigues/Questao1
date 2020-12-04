@@ -1,2 +1,44 @@
 # Questao1
 Garotes de Programa- Ayla Rodrigues de Moura, Douglas Mareli, João Spala, Sofia Kitaeva - Questão 1
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main () {
+	
+	int quadrado[10][10];
+	
+	
+	for(int i = 0; i < 10; i++)
+	{
+		for(int j = 0; j< 10; j++)
+		{
+			quadrado[i][j] = 0;
+		}
+	}
+	
+	int x,y; //linha e coluna
+	while(x != -1 && y != -1)
+	{
+		scanf("%d %d",&x,&y);
+		quadrado[x][y] = 1;
+	}
+	
+	for(int y = 0; y < 10; y++)
+	{
+		for(int z = 0; z < 10; z++)
+		{
+			if(quadrado[y][z] == 1)
+			{
+				printf(" 0 ");
+			}else if(quadrado[y][z] == 0)
+			{
+				printf(" ");
+			}
+				
+		}
+		printf("\n");
+	}
+	
+	return 0;
+}
