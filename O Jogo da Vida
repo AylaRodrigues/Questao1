@@ -1,34 +1,13 @@
-# Questao1
-Garotes de Programa- Ayla Rodrigues de Moura, Douglas Mareli, João Spala, Sofia Kitaeva - Questão 1
-
 #include <stdio.h>
 #include <stdlib.h>
 
 int main () {
-	
-	setlocale (LC_ALL,"");
+
 	char start;
+	int quadrado[30][30];
 
 	printf("Para iniciação randômica digite 'r', para selecionar as células digite 'c'\n");
 	scanf("%s", &start);
-
-	if (start== 'r')
-	{
-		int espacos;
-		int rd;
-		printf("Quantas células vivas?\n");
-		scanf("%d", &espacos);
-		rd = espacos * 2;
-
-		for (int rd = 0; rd < rd-1; rd++)
-		{
-		    printf("%d\n", rand() % 10);
-		}
-		
-		else
-		
-	int quadrado[30][30];
-	
 	
 	for(int i = 0; i < 30; i++)
 	{
@@ -37,12 +16,22 @@ int main () {
 			quadrado[i][j] = 0;
 		}
 	}
-	
-	int x,y; //linha e coluna
-	while(x != -1 && y != -1)
+
+	if (start== 'r')
 	{
-		scanf("%d %d",&x,&y);
-		quadrado[x][y] = 1;
+		int espacos;
+		int rd;
+		int l,c;
+		printf("Quantas células vivas?\n");
+		scanf("%d", &espacos);
+		rd = espacos;
+		
+		for(int i = 0; i < espacos; i++)
+		{
+			l= rand() %29;
+			c= rand() %29;
+			quadrado[l][c]=1;
+		}
 	}
 	
 	for(int y = 0; y < 30; y++)
@@ -61,5 +50,5 @@ int main () {
 		printf("\n");
 	}
 	
-	return 0;
+	return 0;	
 }
