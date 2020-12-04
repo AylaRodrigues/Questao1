@@ -3,42 +3,57 @@ Garotes de Programa- Ayla Rodrigues de Moura, Douglas Mareli, João Spala, Sofia
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
+#include <locale.h>
 
-int main () {
+int main()
+{
+	setlocale (LC_ALL, "");
 	
+	char start;
 	int quadrado[30][30];
 	
-	for(int i = 0; i < 30; i++)
+	printf("Para inicialização randomica digite 'r', para selecionar as célular digite 'c'\n");
+	scanf("%c", &start);
+
+	if(start=='c')
 	{
-		for(int j = 0; j< 30; j++)
+		for(int i = 0; i < 30; i++)
 		{
-			quadrado[i][j] = 0;
-		}
-	}
-	
-	//opção de escolha
-	int x,y; //linha e coluna
-	while(x != -1 && y != -1)
-	{
-		scanf("%d %d",&x,&y);
-		quadrado[x][y] = 1;
-	}
-	
-	//printar o tabuleiro
-	for(int y = 0; y < 30; y++)
-	{
-		for(int z = 0; z < 30; z++)
-		{
-			if(quadrado[y][z] == 1)
+			for(int j = 0; j< 30; j++)
 			{
-				printf("0");
-			}else if(quadrado[y][z] == 0)
-			{
-				printf(" ");
+				quadrado[i][j] = 0;
 			}
-				
 		}
-		printf("\n");
+		
+		//opção de escolha
+		int x,y; //linha e coluna
+		while(x != -1 && y != -1)
+		{
+			scanf("%d %d",&x,&y);
+			quadrado[x][y] = 1;
+		}
+		
+		//printar o tabuleiro
+		for(int y = 0; y < 30; y++)
+		{
+			for(int z = 0; z < 30; z++)
+			{
+				if(quadrado[y][z] == 1)
+				{
+					printf("0");
+				}else if(quadrado[y][z] == 0)
+				{
+					printf(" ");
+				}
+				
+			}
+			printf("\n");
+		}
+	}
+	else
+	{
+		
 	}
 	
 	return 0;
