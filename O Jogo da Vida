@@ -5,13 +5,40 @@
 #include <stdlib.h>
 #include <Windows.h>
 #include <locale.h>
+#define DIM 30
+void copiar(int copia[DIM][DIM], int quadrado[DIM][DIM])
+{
+    int linha,coluna;
+
+    for(linha = 0 ; linha < DIM ; linha++)
+        for(coluna = 0 ; coluna < DIM ; coluna++)
+            copia[linha][coluna] = quadrado[linha][coluna];
+}
+void printar(int quadrado[DIM][DIM])
+{
+	int linha,coluna;
+	for(int linha = 0; linha < 30; linha++)
+	{
+		for(int coluna = 0; coluna < 30; coluna++)
+		{
+			if(quadrado[linha][coluna] == 1)
+			{
+				printf("0");
+			}else if(quadrado[linha][coluna] == 0)
+			{
+				printf(" ");
+			}			
+		}
+		printf("\n");
+	}	
+}
 
 int main()
 {
 	setlocale (LC_ALL, "");
 	
 	char start;
-	int geracoes, quadrado[30][30];
+	int geracoes, quadrado[DIM][DIM],copia[DIM][DIM],ct=0;
 	
 	int x,y; //linha e coluna
 	
@@ -54,54 +81,40 @@ int main()
 			scanf("%d %d",&x,&y);
 			quadrado[x-1][y-1] = 1;
 		}
-	
 	}
-	
 	//printar o tabuleiro
-	for(int y = 0; y < 30; y++)
-	{
-		for(int z = 0; z < 30; z++)
-		{
-			if(quadrado[y][z] == 1)
-			{
-				printf("0");
-			}else if(quadrado[y][z] == 0)
-			{
-				printf(" ");
-			}
-				
-		}
-		printf("\n");
-	}
-	
-	
+	printar (quadrado);
+	//inicio do jogo
 		for(int i=0; i<geracoes; i++)
 	{
-		int ct=0;
+		ct=0;
 		Sleep(1000);
 		system("cls");
+		copiar (copia, quadrado);
+		printar (quadrado);
+		Sleep(1000);
 		for(int x=0; x<30; x++)
 		{
 			for(int y=0; y<30; y++)
 			{
 				//calcular se a célula viva morre
-				if(quadrado[x][y]==1)
+				if(copia[x][y]==1)
 				{
-					if(quadrado[x][y-1]==1)
+					if(copia[x][y-1]==1)
 						ct++;
-					if(quadrado[x+1][y-1]==1)
+					if(copia[x+1][y-1]==1)
 						ct++;
-					if(quadrado[x-1][y-1]==1)
+					if(copia[x-1][y-1]==1)
 						ct++;
-					if(quadrado[x+1][y]==1)
+					if(copia[x+1][y]==1)
 						ct++;
-					if(quadrado[x-1][y]==1)
+					if(copia[x-1][y]==1)
 						ct++;
-					if(quadrado[x][y+1]==1)
+					if(copia[x][y+1]==1)
 						ct++;
-					if(quadrado[x-1][y+1]==1)
+					if(copia[x-1][y+1]==1)
 						ct++;
-					if(quadrado[x+1][y+1]==1)
+					if(copia[x+1][y+1]==1)
 						ct++;
 					if(ct<2 || ct>3)
 						quadrado[x][y]=0;
@@ -109,17 +122,18 @@ int main()
 				//calcular se a célula morta nasce
 				else
 				{
-					if(quadrado[x+1][y+1]) ct++;
-					if(quadrado[x][y+1]) ct++;
-					if(quadrado[x-1][y+1]) ct++;
-					if(quadrado[x-1][y]) ct++;
-					if(quadrado[x-1][y-1]) ct++;
-					if(quadrado[x][y-1]) ct++;
-					if(quadrado[x+1][y-1]) ct++;
+					if(copia[x+1][y+1]) ct++;
+					if(copia[x][y+1]) ct++;
+					if(copia[x-1][y+1]) ct++;
+					if(copia[x-1][y]) ct++;
+					if(copia[x-1][y-1]) ct++;
+					if(copia[x][y-1]) ct++;
+					if(copia[x+1][y-1]) ct++;
 					if(ct==3) quadrado[x][y]=1;
 				}
 			}	
 		}
-	
+
+}
 	return 0;
 }
