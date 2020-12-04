@@ -12,28 +12,13 @@ int main()
 	
 	char start;
 	int quadrado[30][30];
+	int x,y; //linha e coluna
 	
 	printf("Para inicialização randomica digite 'r', para selecionar as célular digite 'c'\n");
 	scanf("%c", &start);
 	
-	if (start== 'r')
-	{
-		int espacos;
-		int rd;
-		int menor;
-		printf("Quantas células vivas?\n");
-		scanf("%d", &espacos);
-		rd = espacos * 2;
-
-		for (int w = 0; w < rd; w++)
-		{
-		    printf("%d \n", rand() % 30);
-		}
-	}	
-
-	else 
-	{
-		for(int i = 0; i < 30; i++)
+	//deixando todos os espaços neutros
+	for(int i = 0; i < 30; i++)
 		{
 			for(int j = 0; j< 30; j++)
 			{
@@ -41,14 +26,30 @@ int main()
 			}
 		}
 		
+	//opção randomica
+	if (start== 'r')
+	{	
+		int espacos;
+		printf("Quantas células vivas?\n");
+		scanf("%d", &espacos);
+		
+		for(int i = 0; i <= espacos; i++)
+		{
+			x= rand() %29;
+			y= rand() %29;
+			quadrado[x][y]=1;
+		}
+		
+	}else 
+	{
 		//opção de escolha
-		int x,y; //linha e coluna
 		printf("Digite as cordenadas das células vivas\n");
 		while(x != -1 && y != -1)
 		{
 			scanf("%d %d",&x,&y);
 			quadrado[x-1][y-1] = 1;
 		}
+	}
 		
 		//printar o tabuleiro
 		for(int y = 0; y < 30; y++)
@@ -66,7 +67,7 @@ int main()
 			}
 			printf("\n");
 		}
-	}
+
 	
 	return 0;
 }
