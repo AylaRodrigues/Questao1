@@ -1,39 +1,63 @@
+//# Questao1
+//Garotes de Programa- Ayla Rodrigues de Moura, Douglas Mareli, João Vitor Spala, Sofia Kitaeva - Questão 1
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <Windows.h>
+#include <locale.h>
 
-int main () {
-
-	char start;
-	int quadrado[30][30];
-
-	printf("Para iniciação randômica digite 'r', para selecionar as células digite 'c'\n");
-	scanf("%s", &start);
+int main()
+{
+	setlocale (LC_ALL, "");
 	
+	char start;
+	int geracoes, quadrado[30][30];
+	
+	int x,y; //linha e coluna
+	
+	printf("Para inicialização randomica digite 'r', para selecionar as célular digite 'c'\n");
+	scanf("%c", &start);
+	
+	printf("Quantas gerações você quer ver?\n");
+	scanf("%d", &geracoes);
+	
+	//deixando todos os espaços neutros
 	for(int i = 0; i < 30; i++)
-	{
-		for(int j = 0; j< 30; j++)
 		{
-			quadrado[i][j] = 0;
+			for(int j = 0; j< 30; j++)
+			{
+				quadrado[i][j] = 0;
+			}
 		}
-	}
-
+		
+	//opção randomica
 	if (start== 'r')
-	{
+	{	
 		int espacos;
-		int rd;
-		int l,c;
 		printf("Quantas células vivas?\n");
 		scanf("%d", &espacos);
-		rd = espacos;
 		
-		for(int i = 0; i < espacos; i++)
+		for(int i = 0; i <= espacos; i++)
 		{
-			l= rand() %29;
-			c= rand() %29;
-			quadrado[l][c]=1;
+			x= rand() %29;
+			y= rand() %29;
+			quadrado[x][y]=1;
 		}
+		
+	}
+	else 
+	{
+		//opção de escolha
+		printf("Digite as cordenadas das células vivas\n");
+		while(x != -1 && y != -1)
+		{
+			scanf("%d %d",&x,&y);
+			quadrado[x-1][y-1] = 1;
+		}
+	
 	}
 	
+	//printar o tabuleiro
 	for(int y = 0; y < 30; y++)
 	{
 		for(int z = 0; z < 30; z++)
@@ -50,5 +74,52 @@ int main () {
 		printf("\n");
 	}
 	
-	return 0;	
+	
+	for(int i=0; i<geracoes; i++)
+	{
+		int ct=0;
+		Sleep(1000);
+		system("cls");
+		for(int x=0; x<30; x++)
+		{
+			for(int y=0; y<30; y++)
+			{
+				//calcular se a célula viva morre
+				if(quadrado[x][y]==1)
+				{
+					
+				}
+				//calcular se a célula morta nasce
+				else if(quadrado[x+1][y]) ct++;
+					 if(quadrado[x+1][y+1]) ct++;
+					 if(quadrado[x][y+1]) ct++;
+					 if(quadrado[x-1][y+1]) ct++;
+					 if(quadrado[x-1][y]) ct++;
+					 if(quadrado[x-1][y-1]) ct++;
+					 if(quadrado[x][y-1]) ct++;
+					 if(quadrado[x+1][y-1]) ct++;
+					 if(ct==3) quadrado[x][y]=1;
+					 
+			}	
+		}
+		
+		//imprimir novo tabuleiro
+		for(int y = 0; y < 30; y++)
+		{
+			for(int z = 0; z < 30; z++)
+			{
+				if(quadrado[y][z] == 1)
+				{
+					printf("0");
+				}else if(quadrado[y][z] == 0)
+				{
+					printf(" ");
+				}
+				
+			}
+			printf("\n");
+		}
+	}
+	
+	return 0;
 }
