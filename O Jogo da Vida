@@ -11,7 +11,7 @@ int main()
 	setlocale (LC_ALL, "");
 	
 	char start;
-	int geracoes, quadrado[30][30];
+	int geracoes, quadrado[30][30],copia[30][30];
 	
 	int x,y; //linha e coluna
 	
@@ -23,12 +23,12 @@ int main()
 	
 	//deixando todos os espaços neutros
 	for(int i = 0; i < 30; i++)
+	{
+		for(int j = 0; j< 30; j++)
 		{
-			for(int j = 0; j< 30; j++)
-			{
-				quadrado[i][j] = 0;
-			}
+			quadrado[i][j] = 0;
 		}
+	}
 		
 	//opção randomica
 	if (start== 'r')
@@ -43,7 +43,6 @@ int main()
 			y= rand() %29;
 			quadrado[x][y]=1;
 		}
-		
 	}
 	else 
 	{
@@ -54,71 +53,84 @@ int main()
 			scanf("%d %d",&x,&y);
 			quadrado[x-1][y-1] = 1;
 		}
-	
 	}
-	
-	//printar o tabuleiro
-	for(int y = 0; y < 30; y++)
+
+	//inicio do jogo
+	for(int i=0; i<=geracoes; i++)
 	{
-		for(int z = 0; z < 30; z++)
+		system ("cls");
+		for(int linha = 0; linha < 30; linha++)
 		{
-			if(quadrado[y][z] == 1)
+			for(int coluna = 0; coluna < 30; coluna++)
 			{
-				printf("0");
-			}else if(quadrado[y][z] == 0)
-			{
-				printf(" ");
-			}
-				
-		}
-		printf("\n");
-	}
-	
-	
-	for(int i=0; i<geracoes; i++)
-	{
-		int ct=0;
-		Sleep(1000);
-		system("cls");
-		for(int x=0; x<30; x++)
-		{
-			for(int y=0; y<30; y++)
-			{
-				//calcular se a célula viva morre
-				if(quadrado[x][y]==1)
-				{
-					
-				}
-				//calcular se a célula morta nasce
-				else if(quadrado[x+1][y]) ct++;
-					 if(quadrado[x+1][y+1]) ct++;
-					 if(quadrado[x][y+1]) ct++;
-					 if(quadrado[x-1][y+1]) ct++;
-					 if(quadrado[x-1][y]) ct++;
-					 if(quadrado[x-1][y-1]) ct++;
-					 if(quadrado[x][y-1]) ct++;
-					 if(quadrado[x+1][y-1]) ct++;
-					 if(ct==3) quadrado[x][y]=1;
-					 
-			}	
-		}
-		
-		//imprimir novo tabuleiro
-		for(int y = 0; y < 30; y++)
-		{
-			for(int z = 0; z < 30; z++)
-			{
-				if(quadrado[y][z] == 1)
+				if(quadrado[linha][coluna] == 1)
 				{
 					printf("0");
-				}else if(quadrado[y][z] == 0)
-				{
-					printf(" ");
 				}
-				
+				else
+				{
+					printf(".");
+				}			
 			}
 			printf("\n");
 		}
+		printf("\n");
+		int ct1=0;
+		int ct2=0;
+		for(int m=0; m<30; m++)
+		{
+			for(int n=0; n<30; n++)
+			{
+				//copiar matrizes
+				copia[m][n] = quadrado[m][n];
+				
+				//calcular se a célula viva morre
+				if(copia[m][n]==1)
+				{
+					if(copia[m][n-1]==1)
+						ct1++;
+					if(copia[m+1][n-1]==1)
+						ct1++;
+					if(copia[m-1][n-1]==1)
+						ct1++;
+					if(copia[m+1][n]==1)
+						ct1++;
+					if(copia[m-1][n]==1)
+						ct1++;
+					if(copia[m][n+1]==1)
+						ct1++;
+					if(copia[m-1][n+1]==1)
+						ct1++;
+					if(copia[m+1][n+1]==1)
+						ct1++;
+					if(ct1<2 || ct1>3)
+						quadrado[m][n]=0;
+				}
+				//calcular se a célula morta nasce
+				else
+				{
+					if(copia[m+1][n+1]==1) 
+						ct2++;
+					if(copia[m+1][n]==1)
+						ct2++;
+					if(copia[m+1][n-1]==1) 
+						ct2++;
+					if(copia[m-1][n+1]==1) 	
+						ct2++;
+					if(copia[m-1][n]==1) 
+						ct2++;
+					if(copia[m-1][n-1]==1)
+						ct2++;
+					if(copia[m][n-1]==1)
+						ct2++;
+					if(copia[m][n+1]==1)
+						ct2++;
+					if(ct2==3)
+						quadrado[m][n]=1;
+				}
+			}	
+		}
+		Sleep(1000);
 	}
 	
 	return 0;
