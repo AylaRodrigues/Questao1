@@ -37,7 +37,7 @@ void printar(int quadrado[DIM][DIM])
 	}	
 }
 
-int contas(int matriz[m][n])
+int contas(int copia[m][n])
 {
 	int ct=0;
 	if(m==0 && (n!=0 && n!=29))
@@ -79,12 +79,13 @@ int contas(int matriz[m][n])
 			{
 				if(m==29 && (n!=0 && n!=29))
 				{
+
 					if(copia[m-1][n]==1)
 						ct++;
 					if(copia[m][n+1]==1)
 						ct++;
 					if(copia[m][n-1]==1)
-						ct++
+						ct++;
 					if(copia[m-1][n+1]==1)
 						ct++;
 					if(copia[m-1][n-1]==1);
@@ -114,7 +115,8 @@ int contas(int matriz[m][n])
 						}
 						else
 						{
-							if((m!=0 && m!= 29) && n==0){
+							if((m!=0 && m!= 29) && n==0)
+							{
 								if(copia[m][n+1]==1)
 									ct++;
 								if(copia[m+1][n+1]==1)
@@ -128,7 +130,8 @@ int contas(int matriz[m][n])
 							}
 							else
 							{
-								if((m!=0 && m!= 29) && n==29){
+								if((m!=0 && m!= 29) && n==29)
+								{
 									if(copia[m][n-1]==1)
 									ct++;
 									if(copia[m+1][n-1]==1)
@@ -142,36 +145,33 @@ int contas(int matriz[m][n])
 								}
 								else	
 								{
-									if((m!=0 && m!= 29) && (n!=0 && n!=29)){
-											
+									if((m!=0 && m!= 29) && (n!=0 && n!=29))
+									{
+										if(copia[m][n-1]==1)
+											ct++;
+										if(copia[m+1][n-1]==1)
+											ct++;
+										if(copia[m-1][n-1]==1)
+											ct++;
+										if(copia[m+1][n]==1)
+											ct++;
+										if(copia[m-1][n]==1)
+											ct++;
+										if(copia[m][n+1]==1)
+											ct++;
+										if(copia[m-1][n+1]==1)
+											ct++;
+										if(copia[m+1][n+1]==1)
+											ct++;
+									}
 								}
-								}
-								}	
-							}
+							}	
 						}
 					}
 				}
 			}
 		}
 	}
-
-
-/*	if(copia[m][n-1]==1)
-		ct++;
-	if(copia[m+1][n-1]==1)
-		ct++;
-	if(copia[m-1][n-1]==1)
-		ct++;
-	if(copia[m+1][n]==1)
-		ct++;
-	if(copia[m-1][n]==1)
-		ct++;
-	if(copia[m][n+1]==1)
-		ct++;
-	if(copia[m-1][n+1]==1)
-		ct++;
-	if(copia[m+1][n+1]==1)
-		ct++;*/
 		
 	return ct;
 }
@@ -230,7 +230,8 @@ int main()
 	{
 		printar(quadrado);
 		printf("\n");
-		int ct;
+		copiar(copia, quadrado);
+		int ct=0;
 		for(m=0; m<30; m++)
 		{
 			for(n=0; n<30; n++)
@@ -245,22 +246,7 @@ int main()
 				//calcular se a célula morta nasce
 				else
 				{
-					if(copia[m+1][n+1]==1) 
-						ct++;
-					if(copia[m+1][n]==1)
-						ct++;
-					if(copia[m+1][n-1]==1) 
-						ct++;
-					if(copia[m-1][n+1]==1) 	
-						ct++;
-					if(copia[m-1][n]==1) 
-						ct++;
-					if(copia[m-1][n-1]==1)
-						ct++;
-					if(copia[m][n-1]==1)
-						ct++;
-					if(copia[m][n+1]==1)
-						ct++;
+					ct= contas(copia[m][n]);
 					if(ct==3)
 						quadrado[m][n]=1;
 				}
