@@ -79,7 +79,77 @@ int contas(int matriz[m][n])
 			{
 				if(m==29 && (n!=0 && n!=29))
 				{
-					
+					if(copia[m-1][n]==1)
+						ct++;
+					if(copia[m][n+1]==1)
+						ct++;
+					if(copia[m][n-1]==1)
+						ct++
+					if(copia[m-1][n+1]==1)
+						ct++;
+					if(copia[m-1][n-1]==1);
+						ct++;
+				}	
+				else
+				{
+					if(m==29 && n==29)
+					{
+						if(copia[m-1][n-1]==1)
+							ct++;
+						if(copia[m][n-1]==1)
+							ct++;
+						if(copia[m-1][n]==1)
+							ct++;
+					}
+					else
+					{
+						if(m==29 && n==0)
+						{
+							if(copia[m][n+1]==1)
+								ct++;
+							if(copia[m-1][n+1]==1)
+								ct++;
+							if(copia[m-1][n]==1)
+								ct++;
+						}
+						else
+						{
+							if((m!=0 && m!= 29) && n==0){
+								if(copia[m][n+1]==1)
+									ct++;
+								if(copia[m+1][n+1]==1)
+									ct++;
+								if(copia[m-1][n+1]==1)
+									ct++;
+								if(copia[m+1][n]==1)
+									ct++;
+								if(copia[m-1][n]==1)
+									ct++;
+							}
+							else
+							{
+								if((m!=0 && m!= 29) && n==29){
+									if(copia[m][n-1]==1)
+									ct++;
+									if(copia[m+1][n-1]==1)
+									ct++;
+									if(copia[m-1][n-1]==1)
+									ct++;
+									if(copia[m+1][n]==1)
+									ct++;
+									if(copia[m-1][n]==1)
+									ct++;
+								}
+								else	
+								{
+									if((m!=0 && m!= 29) && (n!=0 && n!=29)){
+											
+								}
+								}
+								}	
+							}
+						}
+					}
 				}
 			}
 		}
