@@ -5,6 +5,106 @@
 #include <stdlib.h>
 #include <Windows.h>
 #include <locale.h>
+#define DIM 30
+int m, n;
+
+void copiar(int copia[DIM][DIM], int quadrado[DIM][DIM])
+{
+    int linha,coluna;
+
+    for(linha = 0 ; linha < DIM ; linha++)
+        for(coluna = 0 ; coluna < DIM ; coluna++)
+            copia[linha][coluna] = quadrado[linha][coluna];
+}
+
+void printar(int quadrado[DIM][DIM])
+{
+	int linha,coluna;
+	for(int linha = 0; linha < 30; linha++)
+	{
+		for(int coluna = 0; coluna < 30; coluna++)
+		{
+			if(quadrado[linha][coluna] == 1)
+			{
+				printf("0");
+			}
+			else
+			{
+				printf(".");
+			}			
+		}
+		printf("\n");
+	}	
+}
+
+int contas(int matriz[m][n])
+{
+	int ct=0;
+	if(m==0 && (n!=0 && n!=29))
+	{
+		if(copia[m][n-1]==1)
+			ct++;
+		if(copia[m+1][n-1]==1)
+			ct++;
+		if(copia[m+1][n]==1)
+			ct++;
+		if(copia[m][n+1]==1)
+			ct++;
+		if(copia[m+1][n+1]==1)
+			ct++;
+	}
+	else
+	{
+		if(m==0 && n==0)
+		{
+			if(copia[m+1][n]==1)
+				ct++;
+			if(copia[m][n+1]==1)
+				ct++;
+			if(copia[m+1][n+1]==1)
+				ct++;
+		}
+		else
+		{
+			if(m==0 && n==29)
+			{
+				if(copia[m][n-1]==1)
+					ct++;
+				if(copia[m+1][n-1]==1)
+					ct++;
+				if(copia[m+1][n]==1)
+					ct++;
+			}
+			else
+			{
+				if(m==29 && (n!=0 && n!=29))
+				{
+					
+				}
+			}
+		}
+	}
+
+
+/*	if(copia[m][n-1]==1)
+		ct++;
+	if(copia[m+1][n-1]==1)
+		ct++;
+	if(copia[m-1][n-1]==1)
+		ct++;
+	if(copia[m+1][n]==1)
+		ct++;
+	if(copia[m-1][n]==1)
+		ct++;
+	if(copia[m][n+1]==1)
+		ct++;
+	if(copia[m-1][n+1]==1)
+		ct++;
+	if(copia[m+1][n+1]==1)
+		ct++;*/
+		
+	return ct;
+}
 
 int main()
 {
@@ -58,74 +158,40 @@ int main()
 	//inicio do jogo
 	for(int i=0; i<=geracoes; i++)
 	{
-		system ("cls");
-		for(int linha = 0; linha < 30; linha++)
-		{
-			for(int coluna = 0; coluna < 30; coluna++)
-			{
-				if(quadrado[linha][coluna] == 1)
-				{
-					printf("0");
-				}
-				else
-				{
-					printf(".");
-				}			
-			}
-			printf("\n");
-		}
+		printar(quadrado);
 		printf("\n");
-		int ct1=0;
-		int ct2=0;
-		for(int m=0; m<30; m++)
+		int ct;
+		for(m=0; m<30; m++)
 		{
-			for(int n=0; n<30; n++)
-			{
-				//copiar matrizes
-				copia[m][n] = quadrado[m][n];
-				
+			for(n=0; n<30; n++)
+			{	
 				//calcular se a célula viva morre
 				if(copia[m][n]==1)
 				{
-					if(copia[m][n-1]==1)
-						ct1++;
-					if(copia[m+1][n-1]==1)
-						ct1++;
-					if(copia[m-1][n-1]==1)
-						ct1++;
-					if(copia[m+1][n]==1)
-						ct1++;
-					if(copia[m-1][n]==1)
-						ct1++;
-					if(copia[m][n+1]==1)
-						ct1++;
-					if(copia[m-1][n+1]==1)
-						ct1++;
-					if(copia[m+1][n+1]==1)
-						ct1++;
-					if(ct1<2 || ct1>3)
+					ct= contas(copia[m][n]);
+					if(ct<2 || ct>3)
 						quadrado[m][n]=0;
 				}
 				//calcular se a célula morta nasce
 				else
 				{
 					if(copia[m+1][n+1]==1) 
-						ct2++;
+						ct++;
 					if(copia[m+1][n]==1)
-						ct2++;
+						ct++;
 					if(copia[m+1][n-1]==1) 
-						ct2++;
+						ct++;
 					if(copia[m-1][n+1]==1) 	
-						ct2++;
+						ct++;
 					if(copia[m-1][n]==1) 
-						ct2++;
+						ct++;
 					if(copia[m-1][n-1]==1)
-						ct2++;
+						ct++;
 					if(copia[m][n-1]==1)
-						ct2++;
+						ct++;
 					if(copia[m][n+1]==1)
-						ct2++;
-					if(ct2==3)
+						ct++;
+					if(ct==3)
 						quadrado[m][n]=1;
 				}
 			}	
