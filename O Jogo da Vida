@@ -6,7 +6,6 @@
 #include <Windows.h>
 #include <locale.h>
 #define DIM 32
-int m, n;
 
 void copiar(int copia[DIM][DIM], int quadrado[DIM][DIM])
 {
@@ -20,17 +19,27 @@ void copiar(int copia[DIM][DIM], int quadrado[DIM][DIM])
 void printar(int quadrado[DIM][DIM])
 {
 	int linha,coluna;
-	for(int linha = 1; linha < 31; linha++)
+	for(int linha = 0; linha < DIM; linha++)
 	{
-		for(int coluna = 1; coluna < 31; coluna++)
+		for(int coluna = 0; coluna < DIM; coluna++)
 		{
-			if(quadrado[linha][coluna] == 1)
-			{
-				printf("0");
-			}
+			if(linha==0 || linha==31)
+				printf("-");
 			else
 			{
-				printf(" ");
+				if(coluna==0 || coluna==31)
+					printf("|");
+				else
+				{
+					if(quadrado[linha][coluna] == 1)
+					{
+						printf("0");
+					}
+					else
+					{
+						printf(" ");
+					}
+				}
 			}			
 		}
 		printf("\n");
@@ -42,15 +51,18 @@ int main()
 	setlocale (LC_ALL, "");
 	
 	char start;
-	int geracoes, quadrado[32][32],copia[32][32];
+	int geracoes, quadrado[DIM][DIM],copia[DIM][DIM];
 	
 	int x,y; //linha e coluna
 	
-	printf("Para inicialização randomica digite 'r', para selecionar as célular digite 'c'\n");
+	printf("                        =========================\n                        BEM-VINDE AO JOGO DA VIDA\n                        +---+---+---+---+---+---+\n\n");
+	printf("> Para inicialização randomica digite 'r', para selecionar as célular digite 'c'\n");
 	scanf("%c", &start);
+	printf("\n");
 	
-	printf("Quantas gerações você quer ver?\n");
+	printf("> Quantas gerações você quer ver?\n");
 	scanf("%d", &geracoes);
+	printf("\n");
 	
 	//deixando todos os espaços neutros
 	for(int i = 0; i < 32; i++)
@@ -65,7 +77,7 @@ int main()
 	if (start== 'r')
 	{	
 		int espacos;
-		printf("Quantas células vivas?\n");
+		printf("> Quantas células vivas?\n");
 		scanf("%d", &espacos);
 		
 		for(int i = 0; i <= espacos; i++)
@@ -78,7 +90,7 @@ int main()
 	else 
 	{
 		//opção de escolha
-		printf("Digite as cordenadas das células vivas\n");
+		printf("> Digite as cordenadas das células vivas\n");
 		while(x != -1 && y != -1)
 		{
 			scanf("%d %d",&x,&y);
@@ -145,7 +157,7 @@ int main()
 				ct=0;
 			}	
 		}
-		Sleep(250);
+		Sleep(500);
 	}
 	
 	return 0;
