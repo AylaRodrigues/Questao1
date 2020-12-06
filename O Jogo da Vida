@@ -5,8 +5,10 @@
 #include <stdlib.h>
 #include <Windows.h>
 #include <locale.h>
-#define DIM 30
-void copiar(char copia[DIM][DIM], char quadrado[DIM][DIM])
+#define DIM 32
+int m, n;
+
+void copiar(int copia[DIM][DIM], int quadrado[DIM][DIM])
 {
     int linha,coluna;
 
@@ -14,22 +16,33 @@ void copiar(char copia[DIM][DIM], char quadrado[DIM][DIM])
         for(coluna = 0 ; coluna < DIM ; coluna++)
             copia[linha][coluna] = quadrado[linha][coluna];
 }
-void printar(char quadrado[DIM][DIM])
+
+void printar(int quadrado[DIM][DIM])
 {
 	int linha,coluna;
-	for(linha = 0; linha < 30; linha++){
-		for(coluna = 0; coluna < 30; coluna++)
-			printf("%c",quadrado[linha][coluna]);
-	printf("\n");
-}
+	for(int linha = 1; linha < 31; linha++)
+	{
+		for(int coluna = 1; coluna < 31; coluna++)
+		{
+			if(quadrado[linha][coluna] == 1)
+			{
+				printf("0");
+			}
+			else
+			{
+				printf(" ");
+			}			
+		}
+		printf("\n");
+	}	
 }
 
 int main()
 {
 	setlocale (LC_ALL, "");
 	
-	char start,quadrado[DIM][DIM],copia[DIM][DIM];
-	int geracoes, ct=0;
+	char start;
+	int geracoes, quadrado[32][32],copia[32][32];
 	
 	int x,y; //linha e coluna
 	
@@ -40,13 +53,13 @@ int main()
 	scanf("%d", &geracoes);
 	
 	//deixando todos os espaços neutros
-	for(int i = 0; i < 30; i++)
+	for(int i = 0; i < 32; i++)
+	{
+		for(int j = 0; j< 32; j++)
 		{
-			for(int j = 0; j< 30; j++)
-			{
-				quadrado[i][j] = ' ';
-			}
+			quadrado[i][j] = 0;
 		}
+	}
 		
 	//opção randomica
 	if (start== 'r')
@@ -57,11 +70,10 @@ int main()
 		
 		for(int i = 0; i <= espacos; i++)
 		{
-			x= rand() %29;
-			y= rand() %29;
-			quadrado[x][y]= '0';
+			x= rand() %30;
+			y= rand() %30;
+			quadrado[x][y]=1;
 		}
-		
 	}
 	else 
 	{
@@ -70,59 +82,71 @@ int main()
 		while(x != -1 && y != -1)
 		{
 			scanf("%d %d",&x,&y);
-			quadrado[x-1][y-1] = 1;
+			quadrado[x][y] = 1;
 		}
 	}
+
 	//inicio do jogo
-		for(int i=0; i<geracoes; i++)
+	for(int i=0; i<=geracoes; i++)
 	{
-		ct=0;
 		system("cls");
-		copiar (copia, quadrado);
-		printar (quadrado);
-		Sleep(1000);
-		for(int x=0; x<30; x++)
+		int ct=0;
+		printar(quadrado);
+		printf("\n");
+		copiar(copia, quadrado);
+		for(int m=1; m<31; m++)
 		{
-			for(int y=0; y<30; y++)
-			{
+			for(int n=1; n<31; n++)
+			{	
 				//calcular se a célula viva morre
-				if(copia[x][y]=='0')
+				if(copia[m][n]==1)
 				{
-					if(copia[x][y-1]=='0')
+					if(copia[m][n-1]==1)
 						ct++;
-					if(copia[x+1][y-1]=='0')
+					if(copia[m+1][n-1]==1)
 						ct++;
-					if(copia[x-1][y-1]=='0')
+					if(copia[m-1][n-1]==1)
 						ct++;
-					if(copia[x+1][y]=='0')
+					if(copia[m+1][n]==1)
 						ct++;
-					if(copia[x-1][y]=='0')
+					if(copia[m-1][n]==1)
 						ct++;
-					if(copia[x][y+1]=='0')
+					if(copia[m][n+1]==1)
 						ct++;
-					if(copia[x-1][y+1]=='0')
+					if(copia[m-1][n+1]==1)
 						ct++;
-					if(copia[x+1][y+1]=='0')
+					if(copia[m+1][n+1]==1)
 						ct++;
 					if(ct<2 || ct>3)
-						quadrado[x][y]=' ';
+						quadrado[m][n]=0;
 				}
 				//calcular se a célula morta nasce
-				else
+				else 
 				{
-					if(copia[x+1][y+1]=='0') ct++;
-					if(copia[x][y+1]=='0') ct++;
-					if(copia[x-1][y+1]=='0') ct++;
-					if(copia[x-1][y]=='0') ct++;
-					if(copia[x-1][y-1]=='0') ct++;
-					if(copia[x][y-1]=='0') ct++;
-					if(copia[x+1][y-1]=='0') ct++;
-					if(copia[x+1][y]=='0') ct++;
-					if(ct==3) quadrado[x][y]='0';
+					if(copia[m][n-1]==1)
+						ct++;
+					if(copia[m+1][n-1]==1)
+						ct++;
+					if(copia[m-1][n-1]==1)
+						ct++;
+					if(copia[m+1][n]==1)
+						ct++;
+					if(copia[m-1][n]==1)
+						ct++;
+					if(copia[m][n+1]==1)
+						ct++;
+					if(copia[m-1][n+1]==1)
+						ct++;
+					if(copia[m+1][n+1]==1)
+						ct++;
+					if(ct==3)
+						quadrado[m][n]=1;
 				}
+				ct=0;
 			}	
 		}
-
-}
+		Sleep(250);
+	}
+	
 	return 0;
 }
