@@ -24,13 +24,13 @@ void printar(int quadrado[DIM][DIM])
 		for(int coluna = 0; coluna < DIM; coluna++)
 		{
 			if(linha==0 || linha==31){
-				SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 0x08);
+				SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 0x08); //imprime as bordas de cima e baixo
 				printf("-");
 			}
 			else
 			{
 				if(coluna==0 || coluna==31){
-				SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 0x08);
+				SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 0x08); //imprme as bordas laterais
 					printf("|");
 				}
 				else
@@ -60,7 +60,7 @@ int main()
 	int geracoes, quadrado[DIM][DIM],copia[DIM][DIM];
 	
 	int x,y; //linha e coluna
-	printf("\t\t\t\t\t=========================\n\t\t\t\t\tBEM-VINDE AO JOGO DA VIDA\n\t\t\t\t\t+---+---+---+---+---+---+\n\n");
+	printf("\t\t\t=========================\n\t\t\tBEM-VINDE AO JOGO DA VIDA\n\t\t\t+---+---+---+---+---+---+\n\n");
 	SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 0x0B);
 	printf("> Para inicialização randomica digite ");
 	SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 0x0A);
@@ -95,7 +95,7 @@ int main()
 		
 		for(int i = 0; i <= espacos; i++)
 		{
-			x= rand() %30;
+			x= rand() %30; //gera os números aleatórios e atribui às coordenadas da célula
 			y= rand() %30;
 			quadrado[x][y]=1;
 		}
@@ -118,12 +118,12 @@ int main()
 		int ct=0;
 		printar(quadrado);
 		printf("\n");
-		copiar(copia, quadrado);
+		copiar(copia, quadrado); //copia a nova matriaz original para a cópia
 		for(int m=1; m<31; m++)
 		{
 			for(int n=1; n<31; n++)
 			{	
-				//calcular se a célula viva morre
+				//verifica as 8 vizinhas da cópia para calcular se a célula viva morre e altera a matriz original
 				if(copia[m][n]==1)
 				{
 					if(copia[m][n-1]==1)
@@ -145,7 +145,7 @@ int main()
 					if(ct<2 || ct>3)
 						quadrado[m][n]=0;
 				}
-				//calcular se a célula morta nasce
+				//verifica as 8 vizinhas da cópia para calcular se a célula morta nasce e altera a matriz original
 				else 
 				{
 					if(copia[m][n-1]==1)
