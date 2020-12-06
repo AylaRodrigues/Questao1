@@ -23,20 +23,26 @@ void printar(int quadrado[DIM][DIM])
 	{
 		for(int coluna = 0; coluna < DIM; coluna++)
 		{
-			if(linha==0 || linha==31)
+			if(linha==0 || linha==31){
+				SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 0x08);
 				printf("-");
+			}
 			else
 			{
-				if(coluna==0 || coluna==31)
+				if(coluna==0 || coluna==31){
+				SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 0x08);
 					printf("|");
+				}
 				else
 				{
 					if(quadrado[linha][coluna] == 1)
 					{
+						SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 0x0E);
 						printf("0");
 					}
 					else
 					{
+						SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 0x0E);
 						printf(" ");
 					}
 				}
@@ -49,14 +55,21 @@ void printar(int quadrado[DIM][DIM])
 int main()
 {
 	setlocale (LC_ALL, "");
-	
+	SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 0x0C);
 	char start;
 	int geracoes, quadrado[DIM][DIM],copia[DIM][DIM];
 	
 	int x,y; //linha e coluna
-	
-	printf("                        =========================\n                        BEM-VINDE AO JOGO DA VIDA\n                        +---+---+---+---+---+---+\n\n");
-	printf("> Para inicialização randomica digite 'r', para selecionar as célular digite 'c'\n");
+	printf("\t\t\t\t\t=========================\n\t\t\t\t\tBEM-VINDE AO JOGO DA VIDA\n\t\t\t\t\t+---+---+---+---+---+---+\n\n");
+	SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 0x0B);
+	printf("> Para inicialização randomica digite ");
+	SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 0x0A);
+	printf("'r'");
+	SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 0x0B);
+	printf(", para selecionar as células digite ");
+	SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 0x0D);
+	printf("'c'\n");
+	SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 0x0B);
 	scanf("%c", &start);
 	printf("\n");
 	
